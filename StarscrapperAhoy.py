@@ -76,7 +76,7 @@ class Characters:
         if roll == hitratio:
             self._health-=damage * 1.5
             print("CRIT")
-        elif roll >= self._defence:
+        elif roll >= self._defence or self._defence > hitratio:
             self._health-=damage
             print("Hit")
         else:
