@@ -597,7 +597,7 @@ else:
     mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
 with open("AhoyLV.txt", "r") as read_file:
     x=int(read_file.read())
-    while(mc.get_level < x):
+    while(mc.get_level() < x):
         mc.slevelup()
 with open("AhoyParty.txt", "r") as read_file:
     trys=int(read_file.read())
