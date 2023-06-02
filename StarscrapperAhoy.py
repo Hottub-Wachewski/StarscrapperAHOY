@@ -588,7 +588,7 @@ with open("AhoySave.txt", "r") as read_file:
 with open("difficulty.txt", "r") as read_file:
     action=int(read_file.read())
 with open("name.txt", "r") as read_file:
-    name=int(read_file.read())
+    name=str(read_file.read())
 if action=="1":
     mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
 elif action=="2":
