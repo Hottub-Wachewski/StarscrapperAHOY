@@ -204,7 +204,10 @@ class Characters:
                         enemy.damage(self._attack, self._hitratio)
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
-                print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                if enemy.get_health() >= 0:
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                else:
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ "0")
                 print("Option 1: Attack")
                 print("Option 2: Skill")
                 print("Option 3: Search")
@@ -213,7 +216,10 @@ class Characters:
                 while action!="1" and action!="2" and action!="3" and action!="4" and action!="7":
                     print("try again")
                     print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
-                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                    if enemy.get_health() >= 0:
+                        print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                    else:
+                        print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ "0")
                     print("Option 1: Attack")
                     print("Option 2: Skill")
                     print("Option 3: Search")
@@ -407,7 +413,10 @@ class Characters:
                         self._defence = 1
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
-                print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                if enemy.get_health() >= 0:
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                else:
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ "0")
                 print("Option 1: Attack")
                 print("Option 2: Skill")
                 print("Option 3: Search")
@@ -416,7 +425,10 @@ class Characters:
                 while action!="1" and action!="2" and action!="3" and action!="4" and action!="7":
                     print("try again")
                     print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
-                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                    if enemy.get_health() >= 0:
+                        print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
+                    else:
+                        print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ "0")
                     print("Option 1: Attack")
                     print("Option 2: Skill")
                     print("Option 3: Search")
@@ -612,7 +624,7 @@ drake=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,6))
 drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], (1,7))
 beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
 narator1=Characters("Beast?", [300,2,2,2,200,7], ["void", "Slow", "Tears"], (1,14))
-kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "void"], (1,6))
+kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "Wrap"], (1,6))
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
 with open("AhoySave.txt", "r") as read_file:
