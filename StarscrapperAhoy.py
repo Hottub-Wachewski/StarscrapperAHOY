@@ -159,7 +159,7 @@ class Characters:
                         print("[Shelly] full blast")
                         enemy.damage(self._attack*self._hitratio, 9223372036854775807)
                         self._partymp -= 10
-                    elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
+                    elif self._partyskills1[skillskillet] == "self strike" and self._health>=0:
                         print("[Shelly] self strike")
                         self._health -= self._speed
                         self._partymp += 30
@@ -484,7 +484,7 @@ class Characters:
                         print("[Shelly] full blast")
                         enemy.damage(self._attack*self._speed, 9223372036854775807)
                         self._partymp -= 10
-                    elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
+                    elif self._partyskills1[skillskillet] == "self strike" and self._health>=0:
                         print("[Shelly] self strike")
                         self._health -= self._speed
                         self._partymp += 15
