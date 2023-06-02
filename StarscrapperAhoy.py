@@ -322,6 +322,13 @@ class Characters:
                     print("[Enemy]: Bite")
                     self._health -= 25
                     enemy.damage(-50, 999999)
+                elif enemy.get_skills()[enemyskillet] == "Tears":
+                    print("[Enemy]: Heavy Tears")
+                    self._health -= 5
+                    self._attack -= 1
+                    self._speed -= 1
+                    if self._attack <= 1:
+                        self._attack = 2
                 time.sleep(0.9)
             if self._speed < enemy.get_speed():
                 if enemy.get_skills()[enemyskillet] == "void":
@@ -376,6 +383,13 @@ class Characters:
                     print("[Enemy]: Bite")
                     self._health -= 25
                     enemy.damage(-50, 999999)
+                elif enemy.get_skills()[enemyskillet] == "Tears":
+                    print("[Enemy]: Heavy Tears")
+                    self._health -= 1
+                    self._defence -= 1
+                    self._speed += 3
+                    if self._defence <= 0:
+                        self._defence = 1
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
                 print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
@@ -557,11 +571,11 @@ def ship(enemies):
                 enemy = enemies[2]
             mc.battle(enemy)
             if mc.get_health() > 0:
-                mc.levelup()
+                mc.levelup(enemy.get_exp())
                 mc.spend(5)
                 if enemy.get_name == enemies[0].get_name:
-                    mc.levelup()
-                    mc.levelup()
+                    mc.levelup(enemy.get_exp())
+                    mc.levelup(enemy.get_exp())
                     mc.spend(5)
             re_burst(mc, enemy)
         elif action == "2":
@@ -578,9 +592,10 @@ def saved():
 """HP ATK HR DEF MP SP"""
 wolf=Characters("Wolf", [10,5,15,1,5,2], ["void", "void", "void"], (1,2))
 shark=Characters("Shark", [15,3,10,1,5,1], ["void", "void", "void"], (1,2))
-drake=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,2))
-drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], (1,2))
+drake=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,6))
+drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], (1,7))
 beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
+narator1=Characters("Beast?", [300,2,2,2,200,7], ["void", "Slow", "Tears"], (1,14))
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
 with open("AhoySave.txt", "r") as read_file:
@@ -808,7 +823,7 @@ if chapter == 1:
     next_engine()
     enemy=drake
     mc.battle(enemy)
-    mc.levelup()
+    mc.levelup(enemy.get_exp())
     re_burst(mc, enemy)
     pa("You feel tired and pass out")
     next_engine()
@@ -842,3 +857,51 @@ if chapter == 2:
     pa("You decide to explore the ship")
     next_engine()
     ship([drake, drake, drakek])
+    pa("You finally reached land")
+    saved()
+saver(chapter)
+if chapter == 3:
+    next_engine()
+    voice("Shelly", "Well, we made it")
+    skip_engine(3)
+    pa("You head onto the land")
+    next_engine()
+    pa("Heading towards the inn")
+    next_engine()
+    pa("You hear a few men talking")
+    next_engine()
+    voice("man1", "Did you hear about the mission?")
+    skip_engine(4)
+    voice("man2", "Yeah, when do they leave?")
+    skip_engine(4)
+    voice("man1", "The first crew leaves in 4 days")
+    skip_engine(4)
+    voice("man3", "You think they can finally find it?")
+    skip_engine(5)
+    voice("man2", "No way, it's been lost for years")
+    skip_engine(4)
+    voice("man1", "Yeah, the old man's chest")
+    skip_engine(4)
+    voice("man2", "They say it holds a powerful secret")
+    next_engine()
+    pa("You wonder what could be in that chest")
+    next_engine()
+    pa("You continue on to the inn")
+    skip_engine(3)
+    pa("Arriving at the inn you decide to stay the night")
+    next_engine()
+    pa("In your dream you see a beast in white clothing")
+    next_engine()
+    pa("Tears are rolling down it's eyes, is it crying?")
+    skip_engine(5)
+    pa("The beast roars and attacks you")
+    next_engine()
+    enemy = narator1
+    mc.battle(enemy)
+    if mc.get_health() > 0:
+        mc.levelup(enemy.get_exp())
+    re_burst(mc, enemy)
+    mc.levelup(enemy.get_exp())
+    saved()
+    chapter += 1
+saver(chapter)
