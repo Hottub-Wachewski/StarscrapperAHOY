@@ -151,18 +151,18 @@ class Characters:
                 if self._party >= 1 and self._party != 4:
                     if self._partyskills1[skillskillet] == "range mode" and self._partymp>=10:
                         print("[Shelly] ranged mode")
-                        enemy.damage(self._attack+10 , self._hitratio-10)
-                        enemy.damage(self._attack, self._hitratio)
-                        enemy.damage(self._attack-10, self._hitratio+10)
+                        enemy.damage(self._attack+20 , self._hitratio)
+                        enemy.damage(self._attack, self._hitratio+10)
+                        enemy.damage(self._attack-10, self._hitratio+20)
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "full blast" and self._partymp>=10:
                         print("[Shelly] full blast")
-                        enemy.damage(self._attack*self._speed, 9223372036854775807)
+                        enemy.damage(self._attack*self._hitratio, 9223372036854775807)
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
                         self._health -= 10
-                        self._partymp += 20
+                        self._partymp += 30
                         self._magic += 20
                     else:
                         print("[Shelly] attack")
@@ -238,7 +238,7 @@ class Characters:
                         if self._health >self._maxhealth:
                             self._health = self._maxhealth
                     elif self._skillist[skillet] == "Cannon Fire":
-                        self._attack += 5
+                        self._attack += 10
                         enemy.damage(self._attack, self._hitratio*10)
                     elif self._skillist[skillet] == "Pain Killer":
                         self._attack -= 1
@@ -253,9 +253,9 @@ class Characters:
                         enemy.damage(self._attack, self._hitratio)
                         self._attack -= 10
                     elif self._skillist[skillet] == "Big Bang Punch":
-                        self._partymp += 15
-                        self._magic += 5
-                        enemy.damage(self._attack*5, self._hitratio*5)
+                        self._partymp += 20
+                        self._magic += 10
+                        enemy.damage(self._attack*5, self._hitratio*10)
                 elif action == "4":
                     print("[???] you are a silly fool")
                     time.sleep(0.9)
@@ -427,29 +427,31 @@ class Characters:
                             self._health = self._maxhealth
                     elif self._skillist[skillet] == "Cannon Fire":
                         self._attack += 5
-                        enemy.damage(self._attack, self._hitratio*10)
+                        enemy.damage(self._attack, self._hitratio*5)
                     elif self._skillist[skillet] == "Pain Killer":
-                        self._attack -= 1
+                        self._attack -= 2
+                        self._speed += 1
                         self._health += 10
                         if self._attack < 1:
                             self._attack = 1
                     elif self._skillist[skillet] == "Charge Strike":
                         self._attack += 5
-                        self._hitratio += 5
+                        self._speed += 2
                     elif self._skillist[skillet] == "Revol Shot":
                         self._attack += 10
                         enemy.damage(self._attack, self._hitratio)
                         self._attack -= 10
                     elif self._skillist[skillet] == "Big Bang Punch":
-                        self._partymp += 15
+                        self._partymp += 10
                         self._magic += 5
-                        enemy.damage(self._attack*5, self._hitratio*5)
+                        self._speed += 2
+                        enemy.damage(self._attack, self._hitratio*5)
                 if self._party >= 1 and self._party != 4:
                     if self._partyskills1[skillskillet] == "range mode" and self._partymp>=10:
                         print("[Shelly] ranged mode")
                         enemy.damage(self._attack+10 , self._hitratio-10)
-                        enemy.damage(self._attack, self._hitratio)
-                        enemy.damage(self._attack-10, self._hitratio+10)
+                        enemy.damage(self._attack, self._hitratio-10)
+                        enemy.damage(self._attack-10, self._hitratio-10)
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "full blast" and self._partymp>=10:
                         print("[Shelly] full blast")
@@ -458,8 +460,8 @@ class Characters:
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
                         self._health -= 10
-                        self._partymp += 20
-                        self._magic += 20
+                        self._partymp += 15
+                        self._magic += 15
                     else:
                         print("[Shelly] attack")
                         enemy.damage(self._attack, self._hitratio)
@@ -819,6 +821,8 @@ if chapter == 1:
     skip_engine(5)
     pa("You feel breathing on your back")
     next_engine()
+    pa("Shelly joins the party!")
+    skip_engine(4)
     pa("The beast attacks you")
     next_engine()
     enemy=drake
