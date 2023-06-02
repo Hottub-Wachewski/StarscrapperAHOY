@@ -161,7 +161,7 @@ class Characters:
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
-                        self._health -= 10
+                        self._health -= self._speed
                         self._partymp += 30
                         self._magic += 20
                     else:
@@ -486,7 +486,7 @@ class Characters:
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
-                        self._health -= 10
+                        self._health -= self._speed
                         self._partymp += 15
                         self._magic += 15
                     else:
