@@ -322,6 +322,14 @@ class Characters:
                     print("[Enemy]: Bite")
                     self._health -= 25
                     enemy.damage(-50, 999999)
+                elif enemy.get_skills()[enemyskillet] == "Wrap":
+                    print("[Enemy]: Wrap")
+                    self._health -= 5
+                    enemy.damage(-10, 999999)
+                    self._magic -= 5
+                    self._speed -= 1
+                    if self._magic < 0:
+                        self._magic = 0
                 elif enemy.get_skills()[enemyskillet] == "Tears":
                     print("[Enemy]: Heavy Tears")
                     self._health -= 5
@@ -330,7 +338,7 @@ class Characters:
                     if self._attack <= 1:
                         self._attack = 2
                 time.sleep(0.9)
-            if self._speed < enemy.get_speed():
+            if self._speed < enemy.get_speed() and enemy.get_health() > 0 and self._health > 0:
                 if enemy.get_skills()[enemyskillet] == "void":
                     print("[Enemy]: Attack")
                     roll = random.randint(0, enemy.get_hitratio())
@@ -375,6 +383,13 @@ class Characters:
                     print("[Enemy]: Time Roar")
                     self._health -= 20
                     enemy.damage(-20, 999999)
+                elif enemy.get_skills()[enemyskillet] == "Wrap":
+                    print("[Enemy]: Wrap")
+                    self._health -= 10
+                    enemy.damage(-10, 999999)
+                    self._magic -= 10
+                    if self._magic < 0:
+                        self._magic = 0
                 elif enemy.get_skills()[enemyskillet] == "Time Roar2":
                     print("[Enemy]: #%&$#$^%")
                     self._health -= 777
@@ -564,19 +579,18 @@ def ship(enemies):
         print("Option 3: head towards land")
         action = input("What now? ")
         if action == "1":
-            roll = random.randint(1, 50)
+            roll = random.randint(1, 70)
             if roll == 1:
-                enemy = enemies[0]
+                enemy = enemies[2]
             elif roll >= 30:
                 enemy = enemies[1]
             else:
-                enemy = enemies[2]
+                enemy = enemies[0]
             mc.battle(enemy)
             if mc.get_health() > 0:
                 mc.levelup(enemy.get_exp())
                 mc.spend(5)
                 if enemy.get_name == enemies[0].get_name:
-                    mc.levelup(enemy.get_exp())
                     mc.levelup(enemy.get_exp())
                     mc.spend(5)
             re_burst(mc, enemy)
@@ -598,6 +612,7 @@ drake=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,6))
 drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], (1,7))
 beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
 narator1=Characters("Beast?", [300,2,2,2,200,7], ["void", "Slow", "Tears"], (1,14))
+kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "void"], (1,6))
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
 with open("AhoySave.txt", "r") as read_file:
@@ -666,6 +681,10 @@ if chapter == 0:
         voice("Narator", "No it isn't")
         next_engine()
         name="Copy Cat"
+    elif name=="Bill" or name=="bill":
+        voice("Bill", "May I borrow that?")
+        next_engine()
+        name="Bill?"
     voice("Narator", "What a nice name")
     next_engine()
     print("from now on you will only need the number pad and enter")
