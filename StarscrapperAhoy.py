@@ -102,6 +102,26 @@ class Characters:
             if self._defencelv == 6:
                 self._ogdefence += 2
                 self._defencelv = 0
+    def slevelup(self, exp):
+        self._exp += exp
+        if self._exp > self._level*10:
+            self._exp -= self._level*10
+            self._level += 1
+            self._maxhealth+=20
+            self._maxmagic+=10
+            self._ogpartymp+=5*self._party
+            self._speedlv += 1
+            self._hitratiolv += 1
+            self._defencelv += 1
+            if self._speedlv == 10:
+                self._ogspeed += 1
+                self._speedlv = 0
+            if self._hitratiolv == 5:
+                self._oghitratio += 2
+                self._hitratiolv = 0
+            if self._defencelv == 6:
+                self._ogdefence += 2
+                self._defencelv = 0
     def battle(self, enemy):
         skillet = 0
         while self._health>0 and enemy.get_health()>0:
@@ -124,7 +144,7 @@ class Characters:
             skillskillet2 = random.randint(0, 2)
             skillskillet3 = random.randint(0, 2)
             if self._speed >= enemy.get_speed():
-                if self._party >= 1:
+                if self._party >= 1 and self._party != 4:
                     if self._partyskills1[skillskillet] == "range mode" and self._partymp>=10:
                         print("[Shelly] ranged mode")
                         enemy.damage(self._attack+10 , self._hitratio-10)
@@ -133,7 +153,7 @@ class Characters:
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "full blast" and self._partymp>=10:
                         print("[Shelly] full blast")
-                        enemy.damage(self._attack*self._speed, 999999)
+                        enemy.damage(self._attack*self._speed, 9223372036854775807)
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
@@ -180,6 +200,7 @@ class Characters:
                         enemy.damage(self._attack, self._hitratio)
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
+                print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
                 print("Option 1: Attack")
                 print("Option 2: Skill")
                 print("Option 3: Search")
@@ -188,6 +209,7 @@ class Characters:
                 while action!="1" and action!="2" and action!="3" and action!="4" and action!="7":
                     print("try again")
                     print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
                     print("Option 1: Attack")
                     print("Option 2: Skill")
                     print("Option 3: Search")
@@ -213,7 +235,7 @@ class Characters:
                             self._health = self._maxhealth
                     elif self._skillist[skillet] == "Cannon Fire":
                         self._attack += 5
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack, self._hitratio*10)
                     elif self._skillist[skillet] == "Pain Killer":
                         self._attack -= 1
                         self._health += 10
@@ -252,6 +274,9 @@ class Characters:
                         self._health-=enemy.get_attack()
                     else:
                         print("Miss")
+                elif enemy.get_skills()[enemyskillet] == "Slow":
+                    print("[Enemy]: Slow")
+                    self._speed -= 2
                 elif enemy.get_skills()[enemyskillet] == "Aura Force":
                     print("[Enemy]: Aura Force")
                     print("<enemy gains health>")
@@ -303,6 +328,9 @@ class Characters:
                         self._health-=enemy.get_attack()
                     else:
                         print("Miss")
+                elif enemy.get_skills()[enemyskillet] == "Slow":
+                    print("[Enemy]: Slow")
+                    self._speed -= 1
                 elif enemy.get_skills()[enemyskillet] == "Aura Force":
                     print("[Enemy]: Aura Force")
                     print("<enemy gains health>")
@@ -346,6 +374,7 @@ class Characters:
                     enemy.damage(-50, 999999)
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
+                print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
                 print("Option 1: Attack")
                 print("Option 2: Skill")
                 print("Option 3: Search")
@@ -354,6 +383,7 @@ class Characters:
                 while action!="1" and action!="2" and action!="3" and action!="4" and action!="7":
                     print("try again")
                     print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
+                    print("Enemy: "+ enemy.get_name() + " Enemy HP: "+ str(enemy.get_health()))
                     print("Option 1: Attack")
                     print("Option 2: Skill")
                     print("Option 3: Search")
@@ -379,7 +409,7 @@ class Characters:
                             self._health = self._maxhealth
                     elif self._skillist[skillet] == "Cannon Fire":
                         self._attack += 5
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack, self._hitratio*10)
                     elif self._skillist[skillet] == "Pain Killer":
                         self._attack -= 1
                         self._health += 10
@@ -396,16 +426,16 @@ class Characters:
                         self._partymp += 15
                         self._magic += 5
                         enemy.damage(self._attack*5, self._hitratio*5)
-                if self._party >= 1:
-                    if self._partyskills1[skillskillet] == "range mode" and self._partymp>=5:
+                if self._party >= 1 and self._party != 4:
+                    if self._partyskills1[skillskillet] == "range mode" and self._partymp>=10:
                         print("[Shelly] ranged mode")
                         enemy.damage(self._attack+10 , self._hitratio-10)
                         enemy.damage(self._attack, self._hitratio)
                         enemy.damage(self._attack-10, self._hitratio+10)
-                        self._partymp -= 5
+                        self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "full blast" and self._partymp>=10:
                         print("[Shelly] full blast")
-                        enemy.damage(self._attack*self._speed, 999999)
+                        enemy.damage(self._attack*self._speed, 9223372036854775807)
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._partymp>=0:
                         print("[Shelly] self strike")
@@ -450,8 +480,31 @@ class Characters:
                         print("[Neo] attack")
                         enemy.damage(self._attack, self._hitratio)
                 time.sleep(0.9)
+            if self._party > 0 and self._party != 4 and enemy.get_health() >= enemy.get_magic():
+                roll = random.randint(1, 9-self._party)
+                if roll == 5:
+                    print("[Party]: FULL ASSAULT!")
+                    enemy.damage(self._attack*self._party, self._hitratio*self._party)
+                elif roll == 1:
+                    print("[Party]: Magic Break!")
+                    self._partymp += self._party
+                elif roll == 2 and self._party == 1:
+                    print("[Shelly]: cheering!")
+                    self._magic += 3
+            elif self._party == 4:
+                roll = random.randint(1, 5)
+                if roll == 1:
+                    print("[Party]: Party Assault?")
+                    enemy.damage(self._attack, self._hitratio)
+                elif roll == 2:
+                    print("[Party]: Magic Break?")
+                    self._partymp += self._party
+                elif roll == 3:
+                    print("[Shelly]: Shelly's tears")
+                    self._magic += 3
+                    self._partymp += 6
             if self._magic < 0:
-                    self._magic = 0
+                self._magic = 0
             if self._magic > 99:
                 self._magic = 99
             if self._health > 999:
@@ -466,11 +519,63 @@ def voice(person, speach):
     print("["+person+"] "+speach)
 def pa(text):
     print("<"+text+">")
-pa("<You look around and see some weird building>")
+def re_burst(mc, enemy):
+    mc.reset()
+    enemy.reset()
+def saver(chapter):
+    output_file = open("Saves.txt", "w")
+    output_file.write(str(chapter))
+    output_file.close()
+    output_file = open("Name.txt", "w")
+    output_file.write(str(name))
+    output_file.close()
+"""/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
+"""HP ATK HR DEF MP SP"""
+wolf=Characters("Wolf", [10,5,15,1,5,2], ["void", "void", "void"], (1,2))
+shark=Characters("Shark", [15,3,10,1,5,1], ["void", "void", "void"], (1,2))
+drake=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,2))
+beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
+"""/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
+chapter = 0
+with open("AhoySave.txt", "r") as read_file:
+    chapter=int(read_file.read())
+with open("difficulty.txt", "r") as read_file:
+    action=int(read_file.read())
+with open("name.txt", "r") as read_file:
+    name=int(read_file.read())
+if action=="1":
+    mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+elif action=="2":
+    mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+else:
+    mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+with open("AhoyLV.txt", "r") as read_file:
+    x=int(read_file.read())
+    while(mc.get_level < x):
+        mc.slevelup()
+with open("AhoyParty.txt", "r") as read_file:
+    trys=int(read_file.read())
+    mc.new_party(trys)
+pa("You look around and see some weird building")
 next_engine()
 pa("How did you get here?")
 next_engine()
 voice("???", "Go! Quick! Run for the exit")
+skip_engine(5)
+pa("You start to run in a random direction")
+next_engine()
+pa("You see an exit but see some beast in the way")
+next_engine()
+pa("What is this feeling?")
+next_engine()
+pa("Your body feels warm...")
+next_engine()
+pa("Is this the truth?")
+next_engine()
+mc=Characters("???", [999,10,50,15,0,5], ["Cannon Fire", "Ahoy!", "Big Bang Punch"], (1,2))
+mc.new_party(3)
+enemy = beast
+mc.battle(enemy)
 pa("You blacked out")
 next_engine()
 #main story start
@@ -515,7 +620,7 @@ if action=="1":
     print("Tutorial battle 2")
     enemy=Characters("Small Beast", [20,2,10,1,5,1], ["void", "void", "void"], (1,2))
     mc.battle(enemy)
-    mc.reset()
+    re_burst(mc, enemy)
     print("Tutorial battle 3")
     enemy=Characters("Small Beast", [10,2,10,1,5,2], ["void", "void", "void"], (1,2))
     mc.battle(enemy)
@@ -533,8 +638,11 @@ elif action=="2":
     mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
 else:
     mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+output_file = open("difficulty.txt", "w")
+output_file.write(str(action))
+output_file.close()
 x=0
-while x<=6:
+while x<=4:
     x+=1
     pa("You wake up somewhere")
     next_engine()
@@ -556,13 +664,13 @@ while x<=6:
         pa("It looks like a wolf")
         next_engine()
         pa("It suddenly bolts at you")
-        enemy=Characters("Wolf", [10,5,15,1,5,2], ["void", "void", "void"], (1,2))
+        enemy=wolf
         mc.battle(enemy)
         if mc.get_health()>0:
             mc.levelup(enemy.get_exp())
             b=1
             next_engine()
-        mc.reset()
+        re_burst(mc, enemy)
     if action=="1":
         pa("You walk into the cave")
         next_engine()
@@ -588,14 +696,14 @@ while x<=6:
         skip_engine(4)
         pa("A shark attacks you")
         next_engine()
-        enemy=Characters("Shark", [15,3,10,1,5,1], ["void", "void", "void"], (1,2))
+        enemy=shark
         mc.battle(enemy)
         if mc.get_health()>0:
             mc.levelup(enemy.get_exp())
             i=1
             pa("You climb onto the boat")
             next_engine()
-        mc.reset()
+        re_burst(mc, enemy)
     if action=="2":
         pa("The ship is old an rotted")
         next_engine()
@@ -648,7 +756,9 @@ pa("You feel breathing on your back")
 next_engine()
 pa("The beast attacks you")
 next_engine()
-enemy=Characters("Drake", [30,7,15,4,5,5], ["void", "void", "void"], (1,2))
-mc.battle()
+enemy=drake
+mc.battle(enemy)
+mc.levelup()
+re_burst(mc, enemy)
 pa("You feel tired and pass out")
 next_engine()
