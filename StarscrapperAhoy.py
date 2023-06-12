@@ -168,10 +168,10 @@ class Characters:
                         print("[Shelly] attack")
                         enemy.damage(self._attack, self._hitratio)
                 if self._party >= 2:
-                    if self._partyskills2[skillskillet2] == "regen wave" and self._partymp>=10:
+                    if self._partyskills2[skillskillet2] == "regen wave" and self._partymp>=5:
                         print("[Drake] regen wave")
-                        self._health += 20
-                        self._partymp -= 10
+                        self._health += 40
+                        self._partymp -= 5
                     elif self._partyskills2[skillskillet2] == "artist block" and self._partymp>=5:
                         print("[Drake] artist block")
                         self._speed += 1
@@ -179,7 +179,7 @@ class Characters:
                         self._partymp -= 5
                     elif self._partyskills2[skillskillet2] == "call of the dead" and self._partymp>=5:
                         print("[Drake] call of the dead")
-                        self._hitratio += 3
+                        self._hitratio += 4
                         enemy.damage(self._attack, self._hitratio)
                         self._partymp -= 5
                     else:
@@ -192,13 +192,14 @@ class Characters:
                         self._partymp -= 10
                     elif self._partyskills3[skillskillet3] == "sharpen" and self._partymp>=5:
                         print("[Neo] sharpen")
-                        self._attack += 5
-                        self._partymp -= 5
-                    elif self._partyskills3[skillskillet3] == "blitz" and self._partymp>=10:
-                        print("[Neo] blitz")
                         self._attack += 3
-                        self._speed += 1
-                        self._partymp -= 10
+                        self._hitratio += 1
+                        self._partymp -= 5
+                    elif self._partyskills3[skillskillet3] == "blitz" and self._partymp>=5:
+                        print("[Neo] blitz")
+                        self._attack += 2
+                        enemy.damage(self._attack, self._hitratio)
+                        self._partymp -= 5
                     else:
                         print("[Neo] attack")
                         enemy.damage(self._attack, self._hitratio)
@@ -262,6 +263,21 @@ class Characters:
                         self._partymp += 20
                         self._magic += 10
                         enemy.damage(self._attack*5, self._hitratio*10)
+                    elif self._skillist[skillet] == "Revolt Beam":
+                        self._speed = 1
+                        enemy.damage(self._attack, 999999)
+                        enemy.damage(self._attack, 999999)
+                        enemy.damage(self._attack, 999999)
+                    elif self._skillist[skillet] == "Rebel Wishes":
+                        self._attack += 5
+                        self._speed -= 2
+                        self._health += self._magic + self._attack
+                        if self._health >self._maxhealth:
+                            self._health = self._maxhealth
+                    elif self._skillist[skillet] == "Soul Liberate":
+                        self._attack += 10
+                        self._hitratio += 10
+                        self._partymp += 10
                 elif action == "4":
                     print("[???] you are a silly fool")
                     time.sleep(0.9)
@@ -473,6 +489,21 @@ class Characters:
                         self._magic += 5
                         self._speed += 2
                         enemy.damage(self._attack, self._hitratio*5)
+                    elif self._skillist[skillet] == "Revolt Beam":
+                        self._speed += 20
+                        self._attack += 5
+                        self._hitratio += 5
+                        self._defence += 1
+                    elif self._skillist[skillet] == "Rebel Wishes":
+                        self._attack += 2
+                        self._speed += 3
+                        self._health += self._attack
+                        if self._health >self._maxhealth:
+                            self._health = self._maxhealth
+                    elif self._skillist[skillet] == "Soul Liberate":
+                        self._attack += 5
+                        self._hitratio += 5
+                        self._speed += 2
                 if self._party >= 1 and self._party != 4:
                     if self._partyskills1[skillskillet] == "range mode" and self._partymp>=10:
                         print("[Shelly] ranged mode")
@@ -483,6 +514,7 @@ class Characters:
                     elif self._partyskills1[skillskillet] == "full blast" and self._partymp>=10:
                         print("[Shelly] full blast")
                         enemy.damage(self._attack*self._speed, 9223372036854775807)
+                        self._speed += 1
                         self._partymp -= 10
                     elif self._partyskills1[skillskillet] == "self strike" and self._health>=self._speed+enemy.get_attack():
                         print("[Shelly] self strike")
@@ -495,34 +527,35 @@ class Characters:
                 if self._party >= 2:
                     if self._partyskills2[skillskillet2] == "regen wave" and self._partymp>=10:
                         print("[Drake] regen wave")
-                        self._health += 20
+                        self._health += 30
                         self._partymp -= 10
                     elif self._partyskills2[skillskillet2] == "artist block" and self._partymp>=5:
                         print("[Drake] artist block")
-                        self._speed += 1
-                        self._hitratio += 2
+                        self._speed += 3
+                        self._partymp -= 5
                     elif self._partyskills2[skillskillet2] == "call of the dead" and self._partymp>=5:
                         print("[Drake] call of the dead")
-                        self._hitratio += 3
+                        self._hitratio += 1
+                        self._speed += 1
                         enemy.damage(self._attack, self._hitratio)
                         self._partymp -= 5
                     else:
                         print("[Drake] attack")
                         enemy.damage(self._attack, self._hitratio)
                 if self._party >= 3:
-                    if self._partyskills3[skillskillet3] == "sprint" and self._partymp>=10:
+                    if self._partyskills3[skillskillet3] == "sprint" and self._partymp>=5:
                         print("[Neo] sprint")
-                        self._speed += 2
-                        self._partymp -= 10
+                        self._speed += 3
+                        self._partymp -= 5
                     elif self._partyskills3[skillskillet3] == "sharpen" and self._partymp>=5:
                         print("[Neo] sharpen")
-                        self._attack += 5
+                        self._attack += 7
                         self._partymp -= 5
-                    elif self._partyskills3[skillskillet3] == "blitz" and self._partymp>=10:
+                    elif self._partyskills3[skillskillet3] == "blitz" and self._partymp>=5:
                         print("[Neo] blitz")
-                        self._attack += 3
-                        self._speed += 1
-                        self._partymp -= 10
+                        self._attack += 5
+                        self._speed += 2
+                        self._partymp -= 5
                     else:
                         print("[Neo] attack")
                         enemy.damage(self._attack, self._hitratio)
@@ -552,10 +585,10 @@ class Characters:
                     self._partymp += 6
             if self._magic < 0:
                 self._magic = 0
-            if self._magic > 99:
-                self._magic = 99
-            if self._health > 999:
-                self._health = 999
+            if self._magic > 9999:
+                self._magic = 9999
+            if self._health > 9999:
+                self._health = 9999
         print("Battle End")
         self._attack = self._ogattack
         self._hitratio = self._oghitratio
