@@ -1,6 +1,6 @@
 import time
 import random
-def next_engine():
+de:
     input("...")
 def skip_engine(x):
     while x>0:
@@ -638,9 +638,17 @@ class Characters:
         self._partymp = self._ogpartymp
         self._speed = self._ogspeed
 def voice(person, speach):
-    print("["+person+"] "+speach)
+    print("["+person+"]", end=" ", flush=True)
+    for i in speach:
+        print(i, end="", flush=True)
+        time.sleep(0.1)
+    print("")
 def pa(text):
-    print("<"+text+">")
+    print("<", end="", flush=True)
+    for i in text:
+        print(i, end="", flush=True)
+        time.sleep(0.1)
+    print(">")
 def re_burst(mc, enemy):
     mc.reset()
     enemy.reset()
@@ -683,10 +691,10 @@ def ship(enemies):
             re_burst(mc, enemy)
         elif action == "2":
             voice("Shelly", "Wait, you still sleep?")
-            next_engine()
+    
             pa("You decided to rest")
             mc.get_test()
-            next_engine()
+    
         if action != "3":
             action == "0"
 def saved():
@@ -723,62 +731,48 @@ with open("AhoyParty.txt", "r") as read_file:
     mc.new_party(trys)
 if chapter == 0:
     pa("You look around and see some weird building")
-    next_engine()
     pa("How did you get here?")
-    next_engine()
     voice("???", "Go! Quick! Run for the exit")
     skip_engine(5)
     pa("You start to run in a random direction")
-    next_engine()
     pa("You see an exit but see some beast in the way")
-    next_engine()
     pa("What is this feeling?")
-    next_engine()
     pa("Your body feels warm...")
-    next_engine()
     pa("Is this the truth?")
-    next_engine()
     mc=Characters("???", [999,10,50,15,0,5], ["Cannon Fire", "Ahoy!", "Big Bang Punch"], (1,2))
     mc.new_party(3)
     enemy = beast
     mc.battle(enemy)
     pa("You blacked out")
-    next_engine()
     #main story start
     pa("you wake up in a weird space")
     voice("???", "Welcome hero to a new world")
     skip_engine(4)
     print("Press Enter")
-    next_engine()
     voice("???", "I am the narator to your story")
-    next_engine()
     voice("Narator", "I will help you on your quest")
-    next_engine()
     voice("Narator", "So, what is your name?")
     name=input("Name: ")
     if name=="your mom" or name=="jayden" or name=="Your Mom" or name=="Your mom":
         voice("Narator", "You are not funny")
-        next_engine()
+
         name="loser"
     elif name=="jesus" or name=="Jesus" or name=="God":
         voice("Narator", "Those people don't exist here")
-        next_engine()
+
         name="false prophet"
     elif name=="Narator" or name=="narator":
         voice("Narator", "No it isn't")
-        next_engine()
+
         name="Copy Cat"
     elif name=="Bill" or name=="bill":
         voice("Bill", "May I borrow that?")
-        next_engine()
+
         name="Bill?"
     voice("Narator", "What a nice name")
-    next_engine()
     print("from now on you will only need the number pad and enter")
     mc=Characters(name, [20,5,10,2,10,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
-    next_engine()
     voice("Narator", "Is this your first time hero?")
-    next_engine()
     voice("Narator", "Do I need to teach you how to fight?")
     print("1=Yes")
     print("2=No")
@@ -796,7 +790,7 @@ if chapter == 0:
         mc.battle(enemy)
     else:
         voice("Narator", "So, we have met before?")
-        next_engine()
+
     voice("Narator", "Now to choose dificulty")
     print("1=easy")
     print("2=normal")
@@ -818,98 +812,86 @@ if chapter == 1:
     while x<=4:
         x+=1
         pa("You wake up somewhere")
-        next_engine()
+
         pa("Looking around you see the ocean")
-        next_engine()
+
         pa("Water goes on for miles")
-        next_engine()
+
         print("1=walk across beach")
         print("2=try to swim")
         action=input("What will you do? ")
         b=0
         while action=="1" and b==0:
             pa("You walk across the beach")
-            next_engine()
+    
             pa("You come across a small cave")
-            next_engine()
+    
             pa("something comes out and looks at you")
-            next_engine()
+    
             pa("It looks like a wolf")
-            next_engine()
+    
             pa("It suddenly bolts at you")
             enemy=wolf
             mc.battle(enemy)
             if mc.get_health()>0:
                 mc.levelup(enemy.get_exp())
                 b=1
-                next_engine()
+        
             re_burst(mc, enemy)
         if action=="1":
             pa("You walk into the cave")
-            next_engine()
+    
             pa("It is too dark to see")
-            next_engine()
+    
             pa("Soemthing feels off")
-            next_engine()
+    
         i=0
         while action=="2" and i==0:
             pa("You jump into the water")
-            next_engine()
+    
             pa("You keep going")
-            next_engine()
+    
             pa("Looking back you already made it pretty far")
-            next_engine()
+    
             pa("You might actual make it")
-            next_engine()
+    
             pa("You see a boat in the distance")
-            next_engine()
+    
             pa("Something bites your leg")
             skip_engine(3)
             pa("You get dragged under the water")
             skip_engine(4)
             pa("A shark attacks you")
-            next_engine()
+    
             enemy=shark
             mc.battle(enemy)
             if mc.get_health()>0:
                 mc.levelup(enemy.get_exp())
                 i=1
                 pa("You climb onto the boat")
-                next_engine()
+        
             re_burst(mc, enemy)
         if action=="2":
             pa("The ship is old an rotted")
-            next_engine()
+    
             pa("You still see no land in the distance")
-            next_engine()
+    
             pa("Just a small island which you came")
-            next_engine()
+    
             pa("Something feels off")
-            next_engine()
+    
     pa("You wake up on the beach again")
-    next_engine()
     pa("You see a box of matches in the sand")
-    next_engine()
     pa("You go to explore the beach")
-    next_engine()
     pa("You come across a cave")
-    next_engine()
     pa("Nothing stands infront of it")
-    next_engine()
     pa("You light a match and enter the cave")
-    next_engine()
     pa("Some kind of scaled beast appears")
-    next_engine()
     pa("It roars at you then walks away")
-    next_engine()
     pa("You walk farther into the cave")
-    next_engine()
     pa("A box sits in the middle of the floor")
-    next_engine()
     pa("The box is covered in vines")
-    next_engine()
     pa("You walk upto the box")
-    next_engine()
     pa("It seems to be locked")
     skip_engine(4)
     voice("???", "OPEN THE BOX!!!")
@@ -917,69 +899,51 @@ if chapter == 1:
     voice("???", "OPEN IT ALREADY!!!")
     skip_engine(4)
     pa("Something compells you to open the box")
-    next_engine()
     pa("You bang on the lock and it opens")
-    next_engine()
     pa("A girl in all white steps out")
     skip_engine(5)
     voice("???", "Thank you loser!")
     mc.new_party(1)
     skip_engine(5)
     pa("You feel breathing on your back")
-    next_engine()
     pa("Shelly joins the party!")
     skip_engine(4)
     pa("The beast attacks you")
-    next_engine()
     enemy=drake
     mc.battle(enemy)
     mc.levelup(enemy.get_exp())
     re_burst(mc, enemy)
     pa("You feel tired and pass out")
-    next_engine()
     chapter += 1
     saved()
 saver(chapter)
 if chapter == 2:
-    next_engine()
     pa("You slowly start to wake up")
-    next_engine()
     voice("???", "WAKE UP!!!")
-    next_engine()
     pa("You quickly bolt awake")
     skip_engine(3)
     pa("you look around a bit")
     skip_engine(3)
     pa("You seem to be on a boat")
-    next_engine()
     voice("???", "Finally, you are so annoying")
     skip_engine(5)
     voice("???", "I'm Shelly, thanks for saving me")
-    next_engine()
     voice("Shelly", "Welcome aboard my ship")
-    next_engine()
     voice("Shelly", "We call it the hour glass")
-    next_engine()
     voice("Shelly", "You might be wondering why")
     skip_engine(5)
     voice("Shelly", "Well that's a secret")
-    next_engine()
     pa("You decide to explore the ship")
-    next_engine()
     ship([drake, drake, drakek])
     pa("You finally reached land")
     saved()
 saver(chapter)
 if chapter == 3:
-    next_engine()
     voice("Shelly", "Well, we made it")
     skip_engine(3)
     pa("You head onto the land")
-    next_engine()
     pa("Heading towards the inn")
-    next_engine()
     pa("You hear a few men talking")
-    next_engine()
     voice("man1", "Did you hear about the mission?")
     skip_engine(4)
     voice("man2", "Yeah, when do they leave?")
@@ -993,19 +957,14 @@ if chapter == 3:
     voice("man1", "Yeah, the old man's chest")
     skip_engine(4)
     voice("man2", "They say it holds a powerful secret")
-    next_engine()
     pa("You wonder what could be in that chest")
-    next_engine()
     pa("You continue on to the inn")
     skip_engine(3)
     pa("Arriving at the inn you decide to stay the night")
-    next_engine()
     pa("In your dream you see a beast in white clothing")
-    next_engine()
     pa("Tears are rolling down it's eyes, is it crying?")
     skip_engine(5)
     pa("The beast roars and attacks you")
-    next_engine()
     enemy = narator1
     mc.battle(enemy)
     if mc.get_health() > 0:
