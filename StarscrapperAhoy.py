@@ -1,7 +1,5 @@
 import time
 import random
-de:
-    input("...")
 def skip_engine(x):
     while x>0:
         x-=1
@@ -641,13 +639,13 @@ def voice(person, speach):
     print("["+person+"]", end=" ", flush=True)
     for i in speach:
         print(i, end="", flush=True)
-        time.sleep(0.1)
+        time.sleep(0.07)
     print("")
 def pa(text):
     print("<", end="", flush=True)
     for i in text:
         print(i, end="", flush=True)
-        time.sleep(0.1)
+        time.sleep(0.07)
     print(">")
 def re_burst(mc, enemy):
     mc.reset()
