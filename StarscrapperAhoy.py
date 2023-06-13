@@ -106,6 +106,36 @@ class Characters:
             if self._defencelv == 6:
                 self._ogdefence += 2
                 self._defencelv = 0
+        if self._level == 15:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<Your mind grows stronger>")
+            self._skillist = ["Charge Strike", "Ahoy!", "Cannon Fire"]
+        elif self._level == 20:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<Your body grows stronger>")
+            self._skillist = ["Revol Shot", "Ahoy!", "Cannon Fire"]
+        elif self._level == 35:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<You can see the truth>")
+            self._skillist = ["Revol Shot", "Ahoy!", "Big Bang Punch"]
+        elif self._level == 45:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<Your body is liberated>")
+            self._skillist = ["Soul Liberate", "Ahoy!", "Big Bang Punch"]
+        elif self._level == 50:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<Your mind is liberated>")
+            self._skillist = ["Soul Liberate", "Rebel Wishes", "Big Bang Punch"]
+        elif self._level == 60:
+            print("<You feel something change inside of you>")
+            time.sleep(0.8)
+            print("<The truth has been liberated>")
+            self._skillist = ["Soul Liberate", "Rebel Wishes", "Revolt Beam"]
     def slevelup(self, exp):
         self._exp += exp
         if self._exp > self._level*10:
@@ -126,6 +156,18 @@ class Characters:
             if self._defencelv == 6:
                 self._ogdefence += 2
                 self._defencelv = 0
+        if self._level == 15:
+            self._skillist = ["Charge Strike", "Ahoy!", "Cannon Fire"]
+        elif self._level == 20:
+            self._skillist = ["Revol Shot", "Ahoy!", "Cannon Fire"]
+        elif self._level == 35:
+            self._skillist = ["Revol Shot", "Ahoy!", "Big Bang Punch"]
+        elif self._level == 45:
+            self._skillist = ["Soul Liberate", "Ahoy!", "Big Bang Punch"]
+        elif self._level == 50:
+            self._skillist = ["Soul Liberate", "Rebel Wishes", "Big Bang Punch"]
+        elif self._level == 60:
+            self._skillist = ["Soul Liberate", "Rebel Wishes", "Revolt Beam"]
     def battle(self, enemy):
         skillet = 0
         while self._health>0 and enemy.get_health()>0:
