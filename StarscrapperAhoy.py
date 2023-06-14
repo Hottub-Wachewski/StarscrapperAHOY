@@ -287,7 +287,7 @@ class Characters:
                     elif self._skillist[skillet] == "Cannon Fire":
                         self._attack += 10
                         enemy.damage(self._attack, self._hitratio*10)
-                    elif self._skillist[skillet] == "Pain Killer":
+                    elif self._skillist[skillet] == "Pain Remover":
                         self._attack -= 1
                         self._health += 10
                         if self._attack < 1:
@@ -511,7 +511,7 @@ class Characters:
                     elif self._skillist[skillet] == "Cannon Fire":
                         self._attack += 5
                         enemy.damage(self._attack, self._hitratio*5)
-                    elif self._skillist[skillet] == "Pain Killer":
+                    elif self._skillist[skillet] == "Pain Remover":
                         self._attack -= 2
                         self._speed += 1
                         self._health += 10
@@ -715,11 +715,11 @@ with open("difficulty.txt", "r") as read_file:
 with open("name.txt", "r") as read_file:
     name=str(read_file.read())
 if action=="1":
-    mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+    mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
 elif action=="2":
-    mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+    mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
 else:
-    mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+    mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
 with open("AhoyLV.txt", "r") as read_file:
     x=int(read_file.read())
     while(mc.get_level() < x):
@@ -769,7 +769,7 @@ if chapter == 0:
         name="Bill?"
     voice("Narator", "What a nice name")
     print("from now on you will only need the number pad and enter")
-    mc=Characters(name, [20,5,10,2,10,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+    mc=Characters(name, [20,5,10,2,10,1], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
     voice("Narator", "Is this your first time hero?")
     voice("Narator", "Do I need to teach you how to fight?")
     print("1=Yes")
@@ -795,11 +795,11 @@ if chapter == 0:
     print("3=hard")
     action=input("what mode will you play? ")
     if action=="1":
-        mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+        mc=Characters(name, [30,5,20,3,15,4], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
     elif action=="2":
-        mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+        mc=Characters(name, [20,3,10,2,5,1], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
     else:
-        mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Killer", "Revol Shot"], (1,2))
+        mc=Characters(name, [15,2,8,2,5,0], ["Charge Strike", "Pain Remover", "Revol Shot"], (1,2))
     output_file = open("difficulty.txt", "w")
     output_file.write(str(action))
     output_file.close()
