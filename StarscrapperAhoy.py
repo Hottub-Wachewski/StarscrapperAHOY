@@ -63,7 +63,7 @@ class Characters:
     def get_exp(self):
         return self._exp
     def get_test(self):
-        print(self._level)
+        print("HP ", self._level)
         print("Attack ",self._attack,"Hitratio ", self._hitratio,"Defence ", self._defence)
     def reset(self):
         self._health = self._maxhealth
@@ -401,6 +401,10 @@ class Characters:
                         self._attack = 2
                 time.sleep(0.9)
             if self._speed < enemy.get_speed() and enemy.get_health() > 0 and self._health > 0:
+                enemyskillet = random.randint(0, 2)
+                skillskillet = random.randint(0, 2)
+                skillskillet2 = random.randint(0, 2)
+                skillskillet3 = random.randint(0, 2)
                 if enemy.get_skills()[enemyskillet] == "void":
                     print("[Enemy]: Attack")
                     roll = random.randint(0, enemy.get_hitratio())
@@ -689,7 +693,9 @@ def ship(enemies):
             re_burst(mc, enemy)
         elif action == "2":
             voice("Shelly", "Wait, you still sleep?")
-    
+            roll = random.randint(1, 10)
+            if roll == 1:
+                pa("You feel slightly offended")
             pa("You decided to rest")
             mc.get_test()
     
@@ -746,7 +752,6 @@ if chapter == 0:
     pa("you wake up in a weird space")
     voice("???", "Welcome hero to a new world")
     skip_engine(4)
-    print("Press Enter")
     voice("???", "I am the narator to your story")
     voice("Narator", "I will help you on your quest")
     voice("Narator", "So, what is your name?")
