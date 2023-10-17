@@ -604,17 +604,18 @@ class Characters:
                         print("[Neo] attack")
                         enemy.damage(self._attack, self._hitratio)
                 time.sleep(0.9)
-            if self._party > 0 and self._party != 4 and enemy.get_health() >= enemy.get_magic():
+            if self._party > 0 and self._party != 4:
                 roll = random.randint(1, 9-self._party)
                 if roll == 5:
                     print("[Party]: FULL ASSAULT!")
                     enemy.damage(self._attack*self._party, self._hitratio*self._party)
                 elif roll == 1:
                     print("[Party]: Magic Break!")
-                    self._partymp += self._party
+                    self._partymp += self._party*2
                 elif roll == 2 and self._party == 1:
                     print("[Shelly]: cheering!")
                     self._magic += 3
+                    self._attack += 3
             elif self._party == 4:
                 roll = random.randint(1, 5)
                 if roll == 1:
