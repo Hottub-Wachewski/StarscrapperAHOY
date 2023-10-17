@@ -206,7 +206,7 @@ class Characters:
                         self._magic += 20
                     else:
                         print("[Shelly] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack - 4, self._hitratio + 5)
                 if self._party >= 2:
                     if self._partyskills2[skillskillet2] == "regen wave" and self._partymp>=5:
                         print("[Drake] regen wave")
@@ -224,11 +224,11 @@ class Characters:
                         self._partymp -= 5
                     else:
                         print("[Drake] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack - 2, self._hitratio - 2)
                 if self._party >= 3:
                     if self._partyskills3[skillskillet3] == "sprint" and self._partymp>=10:
                         print("[Neo] sprint")
-                        self._speed += 2
+                        self._speed += 3
                         self._partymp -= 10
                     elif self._partyskills3[skillskillet3] == "sharpen" and self._partymp>=5:
                         print("[Neo] sharpen")
@@ -242,7 +242,7 @@ class Characters:
                         self._partymp -= 5
                     else:
                         print("[Neo] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack + 2, self._hitratio + 2)
                 time.sleep(0.9)
                 print("["+self._name+"]", "HP:", self._health, "MP:", self._magic, "skill:", self._skillist[skillet])
                 if enemy.get_health() >= 0:
@@ -567,7 +567,7 @@ class Characters:
                         self._magic += 15
                     else:
                         print("[Shelly] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack + 4, self._hitratio - 2)
                 if self._party >= 2:
                     if self._partyskills2[skillskillet2] == "regen wave" and self._partymp>=10:
                         print("[Drake] regen wave")
@@ -585,7 +585,7 @@ class Characters:
                         self._partymp -= 5
                     else:
                         print("[Drake] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack + 3, self._hitratio + 3)
                 if self._party >= 3:
                     if self._partyskills3[skillskillet3] == "sprint" and self._partymp>=5:
                         print("[Neo] sprint")
@@ -602,7 +602,7 @@ class Characters:
                         self._partymp -= 5
                     else:
                         print("[Neo] attack")
-                        enemy.damage(self._attack, self._hitratio)
+                        enemy.damage(self._attack - 2, self._hitratio + 3)
                 time.sleep(0.9)
             if self._party > 0 and self._party != 4:
                 roll = random.randint(1, 9-self._party)
