@@ -699,7 +699,6 @@ def ship(enemies):
                 pa("You feel slightly offended")
             pa("You decided to rest")
             mc.get_test()
-    
         if action != "3":
             action = "0"
 def saved():
