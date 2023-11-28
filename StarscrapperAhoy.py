@@ -888,17 +888,12 @@ if chapter == 1:
                 mc.levelup(enemy.get_exp())
                 i=1
                 pa("You climb onto the boat")
-        
             re_burst(mc, enemy)
         if action=="2":
-            pa("The ship is old an rotted")
-    
+            pa("The ship is old and rotted")
             pa("You still see no land in the distance")
-    
             pa("Just a small island which you came")
-    
             pa("Something feels off")
-    
     pa("You wake up on the beach again")
     pa("You see a box of matches in the sand")
     pa("You go to explore the beach")
