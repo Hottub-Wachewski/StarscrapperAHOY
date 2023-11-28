@@ -774,19 +774,15 @@ if chapter == 0:
     name=input("Name: ")
     if name=="your mom" or name=="jayden" or name=="Your Mom" or name=="Your mom":
         voice("Narator", "You are not funny")
-
         name="loser"
     elif name=="jesus" or name=="Jesus" or name=="God":
         voice("Narator", "Those people don't exist here")
-
         name="false prophet"
     elif name=="Narator" or name=="narator":
         voice("Narator", "No it isn't")
-
         name="Copy Cat"
     elif name=="Bill" or name=="bill":
         voice("Bill", "May I borrow that?")
-
         name="Bill?"
     voice("Narator", "What a nice name")
     print("from now on you will only need the number pad and enter")
@@ -809,7 +805,6 @@ if chapter == 0:
         mc.battle(enemy)
     else:
         voice("Narator", "So, we have met before?")
-
     voice("Narator", "Now to choose dificulty")
     print("1=easy")
     print("2=normal")
@@ -831,57 +826,40 @@ if chapter == 1:
     while x<=4:
         x+=1
         pa("You wake up somewhere")
-
         pa("Looking around you see the ocean")
-
         pa("Water goes on for miles")
-
         print("1=walk across beach")
         print("2=try to swim")
         action=input("What will you do? ")
         b=0
         while action=="1" and b==0:
             pa("You walk across the beach")
-    
             pa("You come across a small cave")
-    
             pa("something comes out and looks at you")
-    
             pa("It looks like a wolf")
-    
             pa("It suddenly bolts at you")
             enemy=wolf
             mc.battle(enemy)
             if mc.get_health()>0:
                 mc.levelup(enemy.get_exp())
                 b=1
-        
             re_burst(mc, enemy)
         if action=="1":
             pa("You walk into the cave")
-    
             pa("It is too dark to see")
-    
             pa("Soemthing feels off")
-    
         i=0
         while action=="2" and i==0:
             pa("You jump into the water")
-    
             pa("You keep going")
-    
             pa("Looking back you already made it pretty far")
-    
             pa("You might actual make it")
-    
             pa("You see a boat in the distance")
-    
             pa("Something bites your leg")
             skip_engine(3)
             pa("You get dragged under the water")
             skip_engine(4)
             pa("A shark attacks you")
-    
             enemy=shark
             mc.battle(enemy)
             if mc.get_health()>0:
