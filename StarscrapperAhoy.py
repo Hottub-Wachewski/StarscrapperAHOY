@@ -745,7 +745,7 @@ else:
 with open("AhoyLV.txt", "r") as read_file:
     x=int(read_file.read())
     while(mc.get_level() < x):
-        mc.slevelup()
+        mc.slevelup(1)
 with open("AhoyParty.txt", "r") as read_file:
     trys=int(read_file.read())
     mc.new_party(trys)
