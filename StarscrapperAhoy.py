@@ -675,6 +675,7 @@ def ship(enemies):
         print("Option 1: Set sail")
         print("Option 2: Take a rest")
         print("Option 3: head towards land")
+        print("Option 4: talk to the crew")
         action = input("What now? ")
         if action == "1":
             roll = random.randint(1, 70)
@@ -697,8 +698,23 @@ def ship(enemies):
             roll = random.randint(1, 10)
             if roll == 1:
                 pa("You feel slightly offended")
+            elif roll == 2:
+                pa("Wait? She doesn't sleep?")
             pa("You decided to rest")
             mc.get_test()
+        elif action == "4" & mc.get_party() < 2:
+            voice("Shelly", "Wait, you want to spend time together?")
+            roll = random.randint(1, 5)
+            if roll == 1:
+                pa("You played some games together")
+            elif roll == 2:
+                pa("You couldn't find anything fun to do")
+            elif roll == 3:
+                pa("You got sea sick and had to rest")
+            elif roll == 4:
+                pa("You had a nice conversation with Shelly")
+            else:
+                pa("Is time moving slower suddenly?")
         if action != "3":
             action = "0"
 def saved():
