@@ -63,7 +63,8 @@ class Characters:
     def get_exp(self):
         return self._exp
     def get_test(self):
-        print("HP ", self._level)
+        print("HP ", self._health)
+        print("LV ", self._level)
         print("Attack ",self._attack,"Hitratio ", self._hitratio,"Defence ", self._defence)
     def reset(self):
         self._health = self._maxhealth
@@ -678,7 +679,25 @@ def ship(enemies):
         print("Option 4: talk to the crew")
         action = input("What now? ")
         if action == "1":
-            roll = random.randint(1, 70)
+            roll = random.randint(1, 5)
+            if roll == 1:
+                pa("You quickly ran into trouble")
+            elif roll == 2:
+                pa("A beast rises from the water to attack you")
+            elif roll == 3:
+                pa("You see a small monster in the distance")
+                pa("You decide to approach it")
+                pa("You quickly find out it isn't very small")
+            elif roll == 4:
+                pa("Something hits your ship at high speeds")
+            elif roll == 5:
+                pa("Something feels off about this...")
+                mc.spend(5)
+                pa("You found some gold coins")
+            if roll != 5:
+                roll = random.randint(1, 70)
+            else:
+                roll = random.randint(30, 70)
             if roll == 1:
                 enemy = enemies[2]
             elif roll >= 30:
@@ -701,8 +720,9 @@ def ship(enemies):
             elif roll == 2:
                 pa("Wait? She doesn't sleep?")
             pa("You decided to rest")
+            mc.reset()
             mc.get_test()
-        elif action == "4" & mc.get_party() < 2:
+        elif action == "4" and mc.get_party() < 2:
             voice("Shelly", "Wait, you want to spend time together?")
             roll = random.randint(1, 5)
             if roll == 1:
@@ -731,7 +751,11 @@ kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "Wrap"], 
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
 with open("AhoySave.txt", "r") as read_file:
-    chapter=int(read_file.read())
+    content = read_file.read()
+    if content.strip():
+        chapter = int(content)
+    else:
+        print("File is empty.")
 with open("difficulty.txt", "r") as read_file:
     action=int(read_file.read())
 with open("name.txt", "r") as read_file:
@@ -928,34 +952,26 @@ if chapter == 2:
     pa("You decide to explore the ship")
     ship([drake, drake, drakek])
     pa("You finally reached land")
+    chapter += 1
     saved()
 saver(chapter)
 if chapter == 3:
     voice("Shelly", "Well, we made it")
-    skip_engine(3)
     pa("You head onto the land")
     pa("Heading towards the inn")
     pa("You hear a few men talking")
     voice("man1", "Did you hear about the mission?")
-    skip_engine(4)
     voice("man2", "Yeah, when do they leave?")
-    skip_engine(4)
     voice("man1", "The first crew leaves in 4 days")
-    skip_engine(4)
     voice("man3", "You think they can finally find it?")
-    skip_engine(5)
     voice("man2", "No way, it's been lost for years")
-    skip_engine(4)
     voice("man1", "Yeah, the old man's chest")
-    skip_engine(4)
     voice("man2", "They say it holds a powerful secret")
     pa("You wonder what could be in that chest")
     pa("You continue on to the inn")
-    skip_engine(3)
     pa("Arriving at the inn you decide to stay the night")
     pa("In your dream you see a beast in white clothing")
     pa("Tears are rolling down it's eyes, is it crying?")
-    skip_engine(5)
     pa("The beast roars and attacks you")
     enemy = narator1
     mc.battle(enemy)
@@ -963,6 +979,71 @@ if chapter == 3:
         mc.levelup(enemy.get_exp())
     re_burst(mc, enemy)
     mc.levelup(enemy.get_exp())
-    saved()
     chapter += 1
+    saved()
 saver(chapter)
+if chapter == 4:
+    pa("In the morning you decide to get going")
+    pa("Should you ask Shelly if you can go to find the treasure?")
+    print("1=Ask Shelly to go treasure hunting")
+    print("2=See where the ocean brings you today")
+    action = input("What do you do? ")
+    if action == "1":
+        voice("Shelly", "Treasure? Sounds like something a pirate would do")
+        voice("Shelly", "So of course we can go treasure hunting!")
+        pa("You and Shelly set sail on the great blue sea")
+        chapter += 1
+        saved()
+    trip = 1
+    while action == "2":
+        if trip == 2:
+            pa("When did we get back to land?")
+        voice("Shelly", "Well, we should get going soon, prepare to set sail!")
+        ship([drake, drake, drakek])
+        pa("You see a small island in the distance")
+        pa("After close inspection it looks like the island that you were at yesterday")
+        pa("Should you head back there?")
+        print("1=Go back to the island")
+        print("2=Keep sailing and hopefully find new land")
+        action = input("What do you do? ")
+        if action == "1":
+            chapter += 2
+            saved()
+saver(chapter)
+if chapter == 5:
+    pa("After sailing for a while you come across a small floating village")
+    pa("It would probably be nice to check it out")
+    pa("Stopping at the small village it looks fairly interesting")
+    act = "0"
+    while act != "3":
+        pa("Where would you like to go?")
+        print("1=Go fishing & make money")
+        print("2=Stop at the inn to rest")
+        print("3=Go back to the blue seas")
+        act = input("What do you do? ")
+        if act == "1":
+            print("You go fishing in the shallow waters")
+            roll = random.randint(1, 70)
+            if roll <= 5:
+                pa("You found some small fish, maybe you can sell them")
+                mc.spend(3)
+            elif roll <=40:
+                pa("A beast pops out of the waters")
+                mc.battle(drake)
+                if mc.get_health() > 0:
+                    mc.levelup(drake.get_exp())
+                    mc.spend(6)
+            elif roll <=65:
+                pa("A monster attacks you from the water")
+                mc.battle(drakek)
+                if mc.get_health() > 0:
+                    mc.levelup(drakek.get_exp())
+                    mc.spend(8)
+            else:
+                pa("Some kind of beast rises from the water")
+                pa("The monster has giant tentacles")
+                pa("It quickly attacks you")
+                mc.battle(kraken)
+                if mc.get_health() > 0:
+                    mc.levelup(kraken.get_exp())
+                    mc.spend(10)
