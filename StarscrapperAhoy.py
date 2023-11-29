@@ -748,8 +748,10 @@ drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], 
 beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
 narator1=Characters("Beast?", [300,2,2,2,200,7], ["void", "Slow", "Tears"], (1,14))
 kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "Wrap"], (1,6))
+Starscrapper=Characters("Weird lookin' whale", [9999,99,99,99,999,1], ["Slow", "Slow", "Purify"], (1,99))
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
+action = 0
 with open("AhoySave.txt", "r") as read_file:
     content = read_file.read()
     if content.strip():
@@ -757,7 +759,11 @@ with open("AhoySave.txt", "r") as read_file:
     else:
         print("File is empty.")
 with open("difficulty.txt", "r") as read_file:
-    action=int(read_file.read())
+    content = read_file.read()
+    if content.strip():
+        action = int(content)
+    else:
+        print("File is empty.")
 with open("name.txt", "r") as read_file:
     name=str(read_file.read())
 if action=="1":
@@ -1047,3 +1053,46 @@ if chapter == 5:
                 if mc.get_health() > 0:
                     mc.levelup(kraken.get_exp())
                     mc.spend(10)
+        elif act == "2":
+            pa("You stop at the inn for a short rest")
+            voice("Inn Keeper", "Welcome to the east side inn")
+            voice("Inn Keeper", "We have multiple different rooms")
+            pa("You look at the different room options")
+            pa("What room will you take?")
+            print("1=normal room - 5 Gold")
+            print("2=delux room - 12 Gold")
+            print("3=Challenge room - 50 Gold")
+            print("4=Leave the inn")
+            print("Your Gold: ", mc.get_gold())
+            action = input("What do you do? ")
+            if action == "1" and mc.get_gold() >= 5:
+                mc.spend(-5)
+                mc.reset()
+                mc.get_test()
+                pa("You had a nice rest")
+            elif action == "2" and mc.gold() >= 12:
+                mc.spend(-12)
+                mc.levelup(20)
+                mc.reset()
+                mc.get_test()
+                pa("You feel refreshed after that")
+            elif action == "3" and mc.get_gold() >= 50:
+                voice("Inn Keeper", "Are you sure you want this?")
+                print("1=No")
+                print("2=Yes")
+                choice = input("Are you sure? ")
+                if choice == "2":
+                    voice("Inn Keeper", "Your choice I guess")
+                    mc.reset()
+                    mc.get_test()
+                    enemy = Starscrapper
+                    pa("In your dreams some kind of monster attacks you")
+                    mc.battle(enemy)
+                    if mc.get_health() > 0:
+                        mc.levelup(enemy.get_exp())
+                        mc.spend(25)
+            voice("Inn Keeper", "Come again soon")
+    chapter += 1
+    pa("You head back onto the great blue sea")
+    saved()
+saver(chapter)
