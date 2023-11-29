@@ -1141,3 +1141,25 @@ if chapter == 5:
     pa("You head back onto the great blue sea")
     saved()
 saver(chapter)
+if chapter == 6:
+    pa("When you wake up you find that you've crashed onto shore")
+    pa("There is sand all over your body")
+    pa("It kind of hurts to walk but you have to find the ship")
+    pa("Shelly has left the party")
+    mc.new_party(-1)
+    pa("Walking across the beach you come across a large cave")
+    pa("The cave looks to be made of some smooth stone")
+    pa("Do you enter the cave?")
+    print("1=Enter the cave")
+    print("2=Keep walking")
+    action = input("What do you do? ")
+    if action == "2":
+        pa("You keep walking across the beach side")
+        pa("As time goes by it gets dark and you decide to rest")
+        chapter += 1
+        saved()
+    else:
+        pa("You slowly enter the cave")
+        pa("After a while you get tired and decide to rest")
+        chapter += 1
+        saved()
