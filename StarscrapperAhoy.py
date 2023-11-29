@@ -92,49 +92,53 @@ class Characters:
             self._level += 1
             self._maxhealth+=20
             self._maxmagic+=10
-            self._ogpartymp+=5*self._party
+            self._ogpartymp+=10
             self._speedlv += 1
             self._hitratiolv += 1
             self._defencelv += 1
-            if self._speedlv == 10:
+            if self._speedlv >= 8:
                 self._ogspeed += 1
+                self._maxhealth += 5
+                self._maxmagic += 5
+                self._ogpartymp += 5
                 self._speedlv = 0
-            if self._hitratiolv == 5:
+            if self._hitratiolv >= 3:
                 self._oghitratio += 2
                 self._hitratiolv = 0
-            if self._defencelv == 6:
+            if self._defencelv >= 4:
+                self._ogattack += 3
                 self._ogdefence += 2
                 self._defencelv = 0
-        if self._level == 15:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<Your mind grows stronger>")
-            self._skillist = ["Charge Strike", "Ahoy!", "Cannon Fire"]
-        elif self._level == 20:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<Your body grows stronger>")
-            self._skillist = ["Revol Shot", "Ahoy!", "Cannon Fire"]
-        elif self._level == 35:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<You can see the truth>")
-            self._skillist = ["Revol Shot", "Ahoy!", "Big Bang Punch"]
-        elif self._level == 45:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<Your body is liberated>")
-            self._skillist = ["Soul Liberate", "Ahoy!", "Big Bang Punch"]
-        elif self._level == 50:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<Your mind is liberated>")
-            self._skillist = ["Soul Liberate", "Rebel Wishes", "Big Bang Punch"]
-        elif self._level == 60:
-            print("<You feel something change inside of you>")
-            time.sleep(0.8)
-            print("<The truth has been liberated>")
-            self._skillist = ["Soul Liberate", "Rebel Wishes", "Revolt Beam"]
+            if self._level == 15:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<Your mind grows stronger>")
+                self._skillist = ["Charge Strike", "Ahoy!", "Cannon Fire"]
+            elif self._level == 20:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<Your body grows stronger>")
+                self._skillist = ["Revol Shot", "Ahoy!", "Cannon Fire"]
+            elif self._level == 35:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<You can see the truth>")
+                self._skillist = ["Revol Shot", "Ahoy!", "Big Bang Punch"]
+            elif self._level == 45:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<Your body is liberated>")
+                self._skillist = ["Soul Liberate", "Ahoy!", "Big Bang Punch"]
+            elif self._level == 50:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<Your mind is liberated>")
+                self._skillist = ["Soul Liberate", "Rebel Wishes", "Big Bang Punch"]
+            elif self._level == 60:
+                print("<You feel something change inside of you>")
+                time.sleep(0.8)
+                print("<The truth has been liberated>")
+                self._skillist = ["Soul Liberate", "Rebel Wishes", "Revolt Beam"]
     def slevelup(self, exp):
         self._exp += exp
         if self._exp > self._level*10:
@@ -146,13 +150,17 @@ class Characters:
             self._speedlv += 1
             self._hitratiolv += 1
             self._defencelv += 1
-            if self._speedlv == 10:
+            if self._speedlv >= 8:
                 self._ogspeed += 1
+                self._maxhealth += 5
+                self._maxmagic += 5
+                self._ogpartymp += 5
                 self._speedlv = 0
-            if self._hitratiolv == 5:
+            if self._hitratiolv >= 3:
                 self._oghitratio += 2
                 self._hitratiolv = 0
-            if self._defencelv == 6:
+            if self._defencelv >= 4:
+                self._ogattack += 3
                 self._ogdefence += 2
                 self._defencelv = 0
         if self._level == 15:
@@ -172,10 +180,10 @@ class Characters:
         while self._health>0 and enemy.get_health()>0:
             if self._magic < 0:
                     self._magic = 0
-            if self._magic > 99:
-                self._magic = 99
-            if self._health > 999:
-                self._health = 999
+            if self._magic > 9999:
+                self._magic = 9999
+            if self._health > 9999:
+                self._health = 9999
             time.sleep(0.8)
             if skillet == 0:
                 skillet = 1
@@ -393,6 +401,22 @@ class Characters:
                     self._speed -= 1
                     if self._magic < 0:
                         self._magic = 0
+                elif enemy.get_skills()[enemyskillet] == "Wrap2":
+                    print("[Enemy]: #%&$#$^%")
+                    roll = random.randint(0, enemy.get_hitratio())
+                    if roll>self._defence:
+                        print("Hit")
+                        self._health-=enemy.get_attack()
+                    else:
+                        print("Miss")
+                    print("<you feel yourself weaken>")
+                    self._magic -= 5
+                    self._attack -=5
+                    self._speed -= 2
+                    if self._magic < 0:
+                        self._magic = 0
+                    if self._attack < 1:
+                        self._attack = 1
                 elif enemy.get_skills()[enemyskillet] == "Tears":
                     print("[Enemy]: Heavy Tears")
                     self._health -= 5
@@ -457,6 +481,21 @@ class Characters:
                     self._magic -= 10
                     if self._magic < 0:
                         self._magic = 0
+                elif enemy.get_skills()[enemyskillet] == "Wrap2":
+                    print("[Enemy]: #%&$#$^%")
+                    roll = random.randint(0, enemy.get_hitratio())
+                    if roll>self._defence:
+                        print("Hit")
+                        self._health-=enemy.get_attack()
+                    else:
+                        print("Miss")
+                    print("<you feel yourself weaken>")
+                    self._magic -= 10
+                    self._attack -=10
+                    if self._magic < 0:
+                        self._magic = 0
+                    if self._attack < 1:
+                        self._attack = 1
                 elif enemy.get_skills()[enemyskillet] == "Time Roar2":
                     print("[Enemy]: #%&$#$^%")
                     self._health -= 777
@@ -657,6 +696,7 @@ def re_burst(mc, enemy):
     mc.reset()
     enemy.reset()
 def saver(chapter):
+    mc.reset()
     output_file = open("AhoySave.txt", "w")
     output_file.write(str(chapter))
     output_file.close()
@@ -748,7 +788,7 @@ drakek=Characters("Drake King", [140,20,20,10,70,10], ["void", "void", "void"], 
 beast=Characters("Berserker", [500,2,30,10,20,5], ["void", "Slow", "Purify"], (1,2))
 narator1=Characters("Beast?", [300,2,2,2,200,7], ["void", "Slow", "Tears"], (1,14))
 kraken=Characters("Kraken", [300,35,15,10,150,100], ["Slow", "Purify", "Wrap"], (1,6))
-Starscrapper=Characters("Weird lookin' whale", [9999,99,99,99,999,1], ["Slow", "Slow", "Purify"], (1,99))
+Starscrapper=Characters("Weird lookin' whale", [999999,99,999,999,999,1], ["Wrap2", "Purify", "Time Roar2"], (1,9999))
 """/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"""
 chapter = 0
 action = 0
@@ -1035,24 +1075,28 @@ if chapter == 5:
                 mc.spend(3)
             elif roll <=40:
                 pa("A beast pops out of the waters")
-                mc.battle(drake)
+                enemy = drake
+                mc.battle(enemy)
                 if mc.get_health() > 0:
-                    mc.levelup(drake.get_exp())
+                    mc.levelup(enemy.get_exp())
                     mc.spend(6)
             elif roll <=65:
                 pa("A monster attacks you from the water")
-                mc.battle(drakek)
+                enemy = drakek
+                mc.battle(enemy)
                 if mc.get_health() > 0:
-                    mc.levelup(drakek.get_exp())
+                    mc.levelup(enemy.get_exp())
                     mc.spend(8)
             else:
                 pa("Some kind of beast rises from the water")
                 pa("The monster has giant tentacles")
                 pa("It quickly attacks you")
-                mc.battle(kraken)
+                enemy = kraken
+                mc.battle(enemy)
                 if mc.get_health() > 0:
-                    mc.levelup(kraken.get_exp())
+                    mc.levelup(enemy.get_exp())
                     mc.spend(10)
+            enemy.reset()
         elif act == "2":
             pa("You stop at the inn for a short rest")
             voice("Inn Keeper", "Welcome to the east side inn")
@@ -1070,7 +1114,7 @@ if chapter == 5:
                 mc.reset()
                 mc.get_test()
                 pa("You had a nice rest")
-            elif action == "2" and mc.gold() >= 12:
+            elif action == "2" and mc.get_gold() >= 12:
                 mc.spend(-12)
                 mc.levelup(20)
                 mc.reset()
@@ -1082,6 +1126,7 @@ if chapter == 5:
                 print("2=Yes")
                 choice = input("Are you sure? ")
                 if choice == "2":
+                    mc.spend(-50)
                     voice("Inn Keeper", "Your choice I guess")
                     mc.reset()
                     mc.get_test()
