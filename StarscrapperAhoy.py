@@ -35,7 +35,7 @@ class Characters:
     def replace_skills(self, skills):
         self._skillist = skills
     def new_party(self, num):
-        self._party+=num
+        self._party = num
     def spend(self, num):
         self._gold+=num
     def get_health(self):
@@ -1146,7 +1146,7 @@ if chapter == 6:
     pa("There is sand all over your body")
     pa("It kind of hurts to walk but you have to find the ship")
     pa("Shelly has left the party")
-    mc.new_party(-1)
+    mc.new_party(0)
     pa("Walking across the beach you come across a large cave")
     pa("The cave looks to be made of some smooth stone")
     pa("Do you enter the cave?")
@@ -1156,7 +1156,7 @@ if chapter == 6:
     if action == "2":
         pa("You keep walking across the beach side")
         pa("As time goes by it gets dark and you decide to rest")
-        chapter += 1
+        chapter += 2
         saved()
     else:
         pa("You slowly enter the cave")
